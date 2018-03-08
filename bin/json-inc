@@ -101,7 +101,7 @@ function processFile(path){
     
     var fileName = pa.parse(path).base;
     fileName = fileName.substr(0, fileName.length - 1);
-    var newPath = pa.join(__dirname, output, fileName);
+    var newPath = pa.join(process.cwd(), output, fileName);
 
     try{
         //final fixings
