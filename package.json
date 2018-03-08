@@ -1,0 +1,40 @@
+{
+  "name": "@scvo/json-inc",
+  "version": "0.0.1",
+  "description": "A rudimentary JSON transpiler that allows JSON files to be split up into separate files",
+  "main": "index.js",
+  "bin": {
+     "json-inc": "./bin/json-inc"
+  },
+  "preferGlobal": true,
+  "engines": {
+     "node": ">=6.11"
+  },
+  "engineStrict": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scvodigital/json-inc.git"
+  },
+  "keywords": [
+    "SCVO",
+    "JSON",
+    "JSON inc",
+    "JSON includes",
+    "JSON references"
+  ],
+  "author": "Matthew Wilkes (SCVO)",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/scvodigital/json-inc/issues"
+  },
+  "homepage": "https://github.com/scvodigital/json-inc#readme",
+  "dependencies": {
+    "chalk": "^2.3.1",
+    "dot-object": "^1.7.0"
+  },
+  "devDependencies": {
+  }
+}
