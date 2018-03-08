@@ -29,7 +29,7 @@ function getFiles(){
         console.log(chalk.blue(chalk.bold('Input:'), input));
         console.log(chalk.blue(chalk.bold('Output:'), output));
 
-        var outputDir = pa.join(__dirname, output);
+        var outputDir = pa.join(process.cwd(), output);
         if(!fs.existsSync(outputDir)){
             console.log(chalk.yellow('Output directory', chalk.underline(outputDir), 'does not exists. Creating it...'));
             fs.mkdirSync(outputDir);
