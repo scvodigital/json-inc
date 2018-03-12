@@ -1,0 +1,99 @@
+{
+    "string": "<html>\n    <head>\n        <title>I aim to be a big awkward string</title>\n        <script>\n            // Sometimes scripts contain JSON!\n            var dummy = {\n                \"obj\": 'JSON comes in all shapes \"and\" sizes',\n                with: \"Differnt quotes or e'en no quotes\",\n                'blah': 'This string has \\' escaped quotes',\n                \"blah2\": \"As does this \\\" string\"\n            };\n        </script>\n    </head>\n    <body>\n        <h1>I'm just along for the ride</h1>\n    </body>\n</html>\n",
+    "wholeJsonFile": {
+        "test": "This is a test JSON file",
+        "child": {
+            "message": "It has child nodes such as this one",
+            "path": {
+                "someString": "And even nested child nodes",
+                "someNumber": 42,
+                "SomeArray": [
+                    "I'm",
+                    "an",
+                    "array"
+                ],
+                "someObject": {
+                    "message": "It gets deeper"
+                },
+                "someBoolean": false
+            }
+        }
+    },
+    "wholeJsonIncFile": {
+        "test": "This is a test JSON file",
+        "child": {
+            "message": "It has child nodes such as this one",
+            "path": {
+                "someString": "<html>\n    <head>\n        <title>I aim to be a big awkward string</title>\n        <script>\n            // Sometimes scripts contain JSON!\n            var dummy = {\n                \"obj\": 'JSON comes in all shapes \"and\" sizes',\n                with: \"Differnt quotes or e'en no quotes\",\n                'blah': 'This string has \\' escaped quotes',\n                \"blah2\": \"As does this \\\" string\"\n            };\n        </script>\n    </head>\n    <body>\n        <h1>I'm just along for the ride</h1>\n    </body>\n</html>\n",
+                "someNumber": 42,
+                "SomeArray": [
+                    "I'm",
+                    "an",
+                    "array"
+                ],
+                "someObject": {
+                    "test": "This is a test JSON file",
+                    "child": {
+                        "message": "It has child nodes such as this one",
+                        "path": {
+                            "someString": "And even nested child nodes",
+                            "someNumber": 42,
+                            "SomeArray": [
+                                "I'm",
+                                "an",
+                                "array"
+                            ],
+                            "someObject": {
+                                "message": "It gets deeper"
+                            },
+                            "someBoolean": false
+                        }
+                    }
+                },
+                "someBoolean": false
+            }
+        }
+    },
+    "partJsonFile": {
+        "someString": "And even nested child nodes",
+        "someNumber": 42,
+        "SomeArray": [
+            "I'm",
+            "an",
+            "array"
+        ],
+        "someObject": {
+            "message": "It gets deeper"
+        },
+        "someBoolean": false
+    },
+    "partJsonIncFile": {
+        "someString": "<html>\n    <head>\n        <title>I aim to be a big awkward string</title>\n        <script>\n            // Sometimes scripts contain JSON!\n            var dummy = {\n                \"obj\": 'JSON comes in all shapes \"and\" sizes',\n                with: \"Differnt quotes or e'en no quotes\",\n                'blah': 'This string has \\' escaped quotes',\n                \"blah2\": \"As does this \\\" string\"\n            };\n        </script>\n    </head>\n    <body>\n        <h1>I'm just along for the ride</h1>\n    </body>\n</html>\n",
+        "someNumber": 42,
+        "SomeArray": [
+            "I'm",
+            "an",
+            "array"
+        ],
+        "someObject": {
+            "test": "This is a test JSON file",
+            "child": {
+                "message": "It has child nodes such as this one",
+                "path": {
+                    "someString": "And even nested child nodes",
+                    "someNumber": 42,
+                    "SomeArray": [
+                        "I'm",
+                        "an",
+                        "array"
+                    ],
+                    "someObject": {
+                        "message": "It gets deeper"
+                    },
+                    "someBoolean": false
+                }
+            }
+        },
+        "someBoolean": false
+    }
+}

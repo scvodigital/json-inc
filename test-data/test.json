@@ -1,0 +1,17 @@
+{
+    "test": "This is a test JSON file",
+    "child": {
+        "message": "It has child nodes such as this one",
+        "path": {
+            "someString": "And even nested child nodes",
+            "someNumber": 42,
+            "SomeArray": [
+                "I'm", "an", "array"
+            ],
+            "someObject": {
+                "message": "It gets deeper"
+            },
+            "someBoolean": false
+        }
+    }
+}

@@ -4,15 +4,18 @@
   "description": "A rudimentary JSON transpiler that allows JSON files to be split up into separate files",
   "main": "index.js",
   "bin": {
-     "json-inc": "./bin/json-inc"
+    "json-inc": "./bin/json-inc"
   },
   "preferGlobal": true,
   "engines": {
-     "node": ">=6.11"
+    "node": ">=6.11"
   },
   "engineStrict": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run build; ./node_modules/mocha/bin/mocha",
+    "cleanup": "rm -rf ./dist",
+    "build": "npm run cleanup; tsc;",
+    "start": "npm run build; node dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -36,5 +39,7 @@
     "dot-object": "^1.7.0"
   },
   "devDependencies": {
+    "@types/node": "^9.4.7",
+    "mocha": "^5.0.4"
   }
 }

@@ -1,0 +1,7 @@
+{
+    "string": "{$./string.txt}",
+    "wholeJsonFile": "{:./test.json}",
+    "wholeJsonIncFile": "{:./test2.inc.json}",
+    "partJsonFile": "{:./test.json@child.path}",
+    "partJsonIncFile": "{:./test2.inc.json@child.path}"
+}

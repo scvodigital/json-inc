@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>I aim to be a big awkward string</title>
+        <script>
+            // Sometimes scripts contain JSON!
+            var dummy = {
+                "obj": 'JSON comes in all shapes "and" sizes',
+                with: "Differnt quotes or e'en no quotes",
+                'blah': 'This string has \' escaped quotes',
+                "blah2": "As does this \" string"
+            };
+        </script>
+    </head>
+    <body>
+        <h1>I'm just along for the ride</h1>
+    </body>
+</html>
