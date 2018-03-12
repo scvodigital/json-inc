@@ -36,6 +36,7 @@
   "homepage": "https://github.com/scvodigital/json-inc#readme",
   "dependencies": {
     "chalk": "^2.3.1",
+    "coa": "^2.0.1",
     "dot-object": "^1.7.0"
   },
   "devDependencies": {
