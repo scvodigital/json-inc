@@ -1,6 +1,6 @@
 {
   "name": "@scvo/json-inc",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A rudimentary JSON transpiler that allows JSON files to be split up into separate files",
   "main": "index.js",
   "bin": {
@@ -14,7 +14,7 @@
   "scripts": {
     "test": "npm run build; ./node_modules/mocha/bin/mocha",
     "cleanup": "rm -rf ./dist",
-    "build": "npm run cleanup; tsc;",
+    "build": "npm run cleanup; tsc;mv ./dist/json-inc-bin.js ./bin/json-inc",
     "start": "npm run build; node dist/index.js"
   },
   "repository": {
@@ -37,7 +37,8 @@
   "dependencies": {
     "chalk": "^2.3.1",
     "coa": "^2.0.1",
-    "dot-object": "^1.7.0"
+    "dot-object": "^1.7.0",
+    "glob-promise": "^3.4.0"
   },
   "devDependencies": {
     "@types/node": "^9.4.7",

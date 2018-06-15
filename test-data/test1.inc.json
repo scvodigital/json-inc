@@ -1,5 +1,7 @@
 {
     "string": "{$./string.txt}",
+    "{$./**/*.hbs}": "pathDelimiter=_&includePathDepth=2&stripExtension=true",
+    "templates": ["{$./**.hbs}"],
     "wholeJsonFile": "{:./test.json}",
     "wholeJsonIncFile": "{:./test2.inc.json}",
     "partJsonFile": "{:./test.json@child.path}",

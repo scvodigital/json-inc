@@ -2,6 +2,7 @@
     "test": "This is a test JSON file",
     "child": {
         "message": "It has child nodes such as this one",
+        "templates": ["{$./templates/*.hbs}"],
         "path": {
             "someString": "{$./string.txt}",
             "someNumber": 42,

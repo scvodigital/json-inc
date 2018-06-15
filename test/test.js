@@ -2,7 +2,7 @@ const pa = require('path');
 const fs = require('fs');
 
 const assert = require('assert');
-const JsonInc = require('../dist/index').JsonInc;
+const JsonInc = require('../dist/json-inc.js').JsonInc;
 
 var jsonInc = new JsonInc({});
 
