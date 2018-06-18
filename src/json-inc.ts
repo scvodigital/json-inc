@@ -98,7 +98,7 @@ export class JsonInc {
             var file = files[f];
             var contents = fs.readFileSync(file).toString();
             var jsonSafe = JSON.stringify(contents);
-            var key = this.getPartKey(file, options);
+            var key = this.getPartKey(file, options, fullImportPath);
             parts.push('"' + key + '": ' + jsonSafe);
           }
           var contents = parts.join(',\n');
@@ -167,7 +167,7 @@ export class JsonInc {
   async includeJsonAsPart(input: string, baseDir: string, level: number): Promise<string> {
     try {
       const replaceOperations: AsyncReplaceOperation[] = [];
-      input = input.replace(/(?:"\{\#)(.*?)(@.+?)?(?:\}")(?::\s*")(.*?)(?:")(?:[\s\n\r]*?)(,|]|})/ig, (all, filePath, objectPath, argsString, end) => {
+      input = input.replace(/(?:"\{\:)(.*?)(@.+?)?(?:\}")(?::\s*")(.*?)(?:")(?:[\s\n\r]*?)(,|]|})/ig, (all, filePath, objectPath, argsString, end) => {
         const operation = async (resolve, reject): Promise<string> => {
           var options = this.getPartIncludeOptions(argsString);
           var fullImportPath = pa.join(baseDir, filePath);
@@ -191,7 +191,7 @@ export class JsonInc {
             lines.shift();
             lines.pop();
             json = lines.join('\n');
-            var key = this.getPartKey(file, options);
+            var key = this.getPartKey(file, options, fullImportPath);
             parts.push('"' + key + '": ' + json);
           }
           var contents = parts.join(',\n');
@@ -264,14 +264,18 @@ export class JsonInc {
     return output;
   }
 
-  private getPartKey(path: string, options: PartIncludeOptions): string {
+  private getPartKey(path: string, options: PartIncludeOptions, glob: string): string {
     var stringPath = pa.parse(path);
     var key = options.stripExtension ? stringPath.name : stringPath.base;
 
-    if (options.includePathDepth > 0) {
-      var pathParts = stringPath.dir.split('/');
-      var relevantParts = pathParts.slice(pathParts.length - options.includePathDepth);
-      key = relevantParts.join(options.pathDelimiter) + options.pathDelimiter + key;
+    if (options.includeRelativePath) {
+      var relativePathBase = glob.substr(0, glob.indexOf('*'));
+      relativePathBase = glob.substr(0, relativePathBase.lastIndexOf('/'));
+      console.log('Relative Path Base:', relativePathBase, '| Path:', path);
+      var toInclude = stringPath.dir.replace(relativePathBase, '');
+      var pathParts = toInclude.substr(1).split('/').join(options.pathDelimiter);
+      key = pathParts + options.pathDelimiter + key;
+      console.log('Key:', key);
     }
 
     return key;
@@ -280,15 +284,15 @@ export class JsonInc {
   private getPartIncludeOptions(argsString: string): PartIncludeOptions {
     let args = qs.parse(argsString);
     const options: PartIncludeOptions = {
-      includePathDepth: 0,
+      includeRelativePath: true,
       pathDelimiter: '_',
       stripExtension: true
     };
-    if (args.includePathDepth) {
-      if (Array.isArray(args.includePathDepth)) {
-        options.includePathDepth = Number(args.includePathDepth[0]) || 0;
+    if (Object.prototype.hasOwnProperty.call(args, 'includeRelativePath')) {
+      if (Array.isArray(args.includeRelativePath)) {
+        options.includeRelativePath = Boolean(args.includeRelativePath[0]);
       } else {
-        options.includePathDepth = Number(args.includePathDepth) || 0;
+        options.includeRelativePath = Boolean(args.includeRelativePath);
       }
     }
     if (args.pathDelimiter) {
@@ -323,7 +327,7 @@ export interface ICellPosition {
 
 export interface PartIncludeOptions {
   pathDelimiter: string;
-  includePathDepth: number;
+  includeRelativePath: boolean;
   stripExtension: boolean; 
 }
 

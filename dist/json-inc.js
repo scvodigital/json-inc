@@ -178,7 +178,7 @@ var JsonInc = /** @class */ (function () {
                                                 file = files[f];
                                                 contents = fs.readFileSync(file).toString();
                                                 jsonSafe = JSON.stringify(contents);
-                                                key = this.getPartKey(file, options);
+                                                key = this.getPartKey(file, options, fullImportPath);
                                                 parts.push('"' + key + '": ' + jsonSafe);
                                             }
                                             contents = parts.join(',\n');
@@ -298,7 +298,7 @@ var JsonInc = /** @class */ (function () {
                     case 0:
                         _a.trys.push([0, 5, , 6]);
                         replaceOperations_4 = [];
-                        input = input.replace(/(?:"\{\#)(.*?)(@.+?)?(?:\}")(?::\s*")(.*?)(?:")(?:[\s\n\r]*?)(,|]|})/ig, function (all, filePath, objectPath, argsString, end) {
+                        input = input.replace(/(?:"\{\:)(.*?)(@.+?)?(?:\}")(?::\s*")(.*?)(?:")(?:[\s\n\r]*?)(,|]|})/ig, function (all, filePath, objectPath, argsString, end) {
                             var operation = function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
                                 var options, fullImportPath, files, parts, f, file, contents, importDir, obj, json, lines, key, contents;
                                 return __generator(this, function (_a) {
@@ -330,7 +330,7 @@ var JsonInc = /** @class */ (function () {
                                             lines.shift();
                                             lines.pop();
                                             json = lines.join('\n');
-                                            key = this.getPartKey(file, options);
+                                            key = this.getPartKey(file, options, fullImportPath);
                                             parts.push('"' + key + '": ' + json);
                                             _a.label = 4;
                                         case 4:
@@ -416,29 +416,33 @@ var JsonInc = /** @class */ (function () {
         var output = input.replace(/\r\n/g, '\n');
         return output;
     };
-    JsonInc.prototype.getPartKey = function (path, options) {
+    JsonInc.prototype.getPartKey = function (path, options, glob) {
         var stringPath = pa.parse(path);
         var key = options.stripExtension ? stringPath.name : stringPath.base;
-        if (options.includePathDepth > 0) {
-            var pathParts = stringPath.dir.split('/');
-            var relevantParts = pathParts.slice(pathParts.length - options.includePathDepth);
-            key = relevantParts.join(options.pathDelimiter) + options.pathDelimiter + key;
+        if (options.includeRelativePath) {
+            var relativePathBase = glob.substr(0, glob.indexOf('*'));
+            relativePathBase = glob.substr(0, relativePathBase.lastIndexOf('/'));
+            console.log('Relative Path Base:', relativePathBase, '| Path:', path);
+            var toInclude = stringPath.dir.replace(relativePathBase, '');
+            var pathParts = toInclude.substr(1).split('/').join(options.pathDelimiter);
+            key = pathParts + options.pathDelimiter + key;
+            console.log('Key:', key);
         }
         return key;
     };
     JsonInc.prototype.getPartIncludeOptions = function (argsString) {
         var args = qs.parse(argsString);
         var options = {
-            includePathDepth: 0,
+            includeRelativePath: true,
             pathDelimiter: '_',
             stripExtension: true
         };
-        if (args.includePathDepth) {
-            if (Array.isArray(args.includePathDepth)) {
-                options.includePathDepth = Number(args.includePathDepth[0]) || 0;
+        if (Object.prototype.hasOwnProperty.call(args, 'includeRelativePath')) {
+            if (Array.isArray(args.includeRelativePath)) {
+                options.includeRelativePath = Boolean(args.includeRelativePath[0]);
             }
             else {
-                options.includePathDepth = Number(args.includePathDepth) || 0;
+                options.includeRelativePath = Boolean(args.includeRelativePath);
             }
         }
         if (args.pathDelimiter) {

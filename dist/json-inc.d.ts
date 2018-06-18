@@ -9,7 +9,7 @@ export declare class JsonInc {
     private checkJson(input);
     private getJsonErrorPostion(input, position);
     private normalizeLineTerminator(input);
-    private getPartKey(path, options);
+    private getPartKey(path, options, glob);
     private getPartIncludeOptions(argsString);
 }
 export interface IJsonIncOptions {
@@ -24,7 +24,7 @@ export interface ICellPosition {
 }
 export interface PartIncludeOptions {
     pathDelimiter: string;
-    includePathDepth: number;
+    includeRelativePath: boolean;
     stripExtension: boolean;
 }
 export interface AsyncReplaceOperation {
