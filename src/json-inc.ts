@@ -271,11 +271,9 @@ export class JsonInc {
     if (options.includeRelativePath) {
       var relativePathBase = glob.substr(0, glob.indexOf('*'));
       relativePathBase = glob.substr(0, relativePathBase.lastIndexOf('/'));
-      console.log('Relative Path Base:', relativePathBase, '| Path:', path);
       var toInclude = stringPath.dir.replace(relativePathBase, '');
       var pathParts = toInclude.substr(1).split('/').join(options.pathDelimiter);
       key = pathParts + options.pathDelimiter + key;
-      console.log('Key:', key);
     }
 
     return key;
