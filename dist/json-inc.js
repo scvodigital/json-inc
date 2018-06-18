@@ -250,7 +250,7 @@ var JsonInc = /** @class */ (function () {
                                                 objectPath = objectPath.substr(1);
                                                 obj = dot.pick(objectPath, obj);
                                             }
-                                            json = JSON.stringify(obj, null, 4);
+                                            json = JSON.stringify(obj, null, 2);
                                             parts.push(json);
                                             _a.label = 4;
                                         case 4:
@@ -325,7 +325,7 @@ var JsonInc = /** @class */ (function () {
                                                 objectPath = objectPath.substr(1);
                                                 obj = dot.pick(objectPath, obj);
                                             }
-                                            json = JSON.stringify(obj, null, 4);
+                                            json = JSON.stringify(obj, null, 2);
                                             lines = json.split(/\n/ig);
                                             lines.shift();
                                             lines.pop();
@@ -397,7 +397,7 @@ var JsonInc = /** @class */ (function () {
             debugMessage.push('----------------------');
             throw new Error(debugMessage.join('\n'));
         }
-        var output = JSON.stringify(obj, null, 4);
+        var output = JSON.stringify(obj, null, 2);
         return output;
     };
     JsonInc.prototype.getJsonErrorPostion = function (input, position) {
@@ -422,11 +422,9 @@ var JsonInc = /** @class */ (function () {
         if (options.includeRelativePath) {
             var relativePathBase = glob.substr(0, glob.indexOf('*'));
             relativePathBase = glob.substr(0, relativePathBase.lastIndexOf('/'));
-            console.log('Relative Path Base:', relativePathBase, '| Path:', path);
             var toInclude = stringPath.dir.replace(relativePathBase, '');
             var pathParts = toInclude.substr(1).split('/').join(options.pathDelimiter);
             key = pathParts + options.pathDelimiter + key;
-            console.log('Key:', key);
         }
         return key;
     };

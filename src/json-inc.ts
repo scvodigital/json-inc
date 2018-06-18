@@ -143,7 +143,7 @@ export class JsonInc {
               obj = dot.pick(objectPath, obj);
             }
 
-            var json = JSON.stringify(obj, null, 4);
+            var json = JSON.stringify(obj, null, 2);
             parts.push(json);
           }
           output = parts.join(',\n');
@@ -186,7 +186,7 @@ export class JsonInc {
               obj = dot.pick(objectPath, obj);
             }
 
-            var json = JSON.stringify(obj, null, 4);
+            var json = JSON.stringify(obj, null, 2);
             var lines = json.split(/\n/ig);
             lines.shift();
             lines.pop();
@@ -242,7 +242,7 @@ export class JsonInc {
       debugMessage.push('----------------------');
       throw new Error(debugMessage.join('\n'));
     }
-    var output = JSON.stringify(obj, null, 4);
+    var output = JSON.stringify(obj, null, 2);
     return output;
   }
 
