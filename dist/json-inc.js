@@ -300,7 +300,7 @@ var JsonInc = /** @class */ (function () {
                         replaceOperations_4 = [];
                         input = input.replace(/(?:"\{\:)(.*?)(@.+?)?(?:\}")(?::\s*")(.*?)(?:")(?:[\s\n\r]*?)(,|]|})/ig, function (all, filePath, objectPath, argsString, end) {
                             var operation = function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-                                var options, fullImportPath, files, parts, f, file, contents, importDir, obj, json, key, contents;
+                                var options, fullImportPath, files, parts, f, file, contents, importDir, obj, json, lines, key, contents;
                                 return __generator(this, function (_a) {
                                     switch (_a.label) {
                                         case 0:
@@ -326,6 +326,10 @@ var JsonInc = /** @class */ (function () {
                                                 obj = dot.pick(objectPath, obj);
                                             }
                                             json = JSON.stringify(obj, null, 2);
+                                            lines = json.split(/\n/ig);
+                                            lines.shift();
+                                            lines.pop();
+                                            json = lines.join('\n');
                                             key = this.getPartKey(file, options, fullImportPath);
                                             parts.push('"' + key + '": ' + json);
                                             _a.label = 4;

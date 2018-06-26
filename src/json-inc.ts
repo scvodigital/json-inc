@@ -187,10 +187,10 @@ export class JsonInc {
             }
 
             var json = JSON.stringify(obj, null, 2);
-            //var lines = json.split(/\n/ig);
-            //lines.shift();
-            //lines.pop();
-            //json = lines.join('\n');
+            var lines = json.split(/\n/ig);
+            lines.shift();
+            lines.pop();
+            json = lines.join('\n');
             var key = this.getPartKey(file, options, fullImportPath);
             parts.push('"' + key + '": ' + json);
           }
