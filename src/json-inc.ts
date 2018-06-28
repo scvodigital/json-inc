@@ -276,6 +276,15 @@ export class JsonInc {
       key = pathParts + options.pathDelimiter + key;
     }
 
+    if (key[0] === options.pathDelimiter) {
+      key = key.substr(1);
+    }
+
+    if (options.regexExpression && options.regexOptions && options.regexReplace) {
+      var regex = new RegExp(options.regexExpression, options.regexOptions);
+      key = key.replace(regex, options.regexReplace);
+    }
+
     return key;
   }
 
@@ -284,7 +293,10 @@ export class JsonInc {
     const options: PartIncludeOptions = {
       includeRelativePath: true,
       pathDelimiter: '_',
-      stripExtension: true
+      stripExtension: true,
+      regexExpression: Array.isArray(args.regexExpression) ? args.regexExpression[0] : args.regexExpression || undefined,
+      regexOptions: Array.isArray(args.regexOptions) ? args.regexOptions[0] : args.regexOptions|| undefined,
+      regexReplace: Array.isArray(args.regexReplace) ? args.regexReplace[0] : args.regexReplace || undefined
     };
     if (Object.prototype.hasOwnProperty.call(args, 'includeRelativePath')) {
       if (Array.isArray(args.includeRelativePath)) {
@@ -307,6 +319,7 @@ export class JsonInc {
         options.stripExtension = Boolean(args.stripExtension);
       }
     }
+
     return options;
   }
 }
@@ -326,7 +339,10 @@ export interface ICellPosition {
 export interface PartIncludeOptions {
   pathDelimiter: string;
   includeRelativePath: boolean;
-  stripExtension: boolean; 
+  stripExtension: boolean;
+  regexExpression?: string;
+  regexOptions?: string;
+  regexReplace?: string;
 }
 
 export interface AsyncReplaceOperation {

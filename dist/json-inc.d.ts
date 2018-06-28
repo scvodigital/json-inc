@@ -6,11 +6,11 @@ export declare class JsonInc {
     includeStringsAsPart(input: string, baseDir: string): Promise<string>;
     includeJsonAsValue(input: string, baseDir: string, level: number): Promise<string>;
     includeJsonAsPart(input: string, baseDir: string, level: number): Promise<string>;
-    private checkJson(input);
-    private getJsonErrorPostion(input, position);
-    private normalizeLineTerminator(input);
-    private getPartKey(path, options, glob);
-    private getPartIncludeOptions(argsString);
+    private checkJson;
+    private getJsonErrorPostion;
+    private normalizeLineTerminator;
+    private getPartKey;
+    private getPartIncludeOptions;
 }
 export interface IJsonIncOptions {
     maxDepth?: number;
@@ -26,6 +26,9 @@ export interface PartIncludeOptions {
     pathDelimiter: string;
     includeRelativePath: boolean;
     stripExtension: boolean;
+    regexExpression?: string;
+    regexOptions?: string;
+    regexReplace?: string;
 }
 export interface AsyncReplaceOperation {
     match: string;

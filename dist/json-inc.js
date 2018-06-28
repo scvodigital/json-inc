@@ -14,8 +14,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
         while (_) try {
-            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [0, t.value];
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
                 case 0: case 1: t = op; break;
                 case 4: _.label++; return { value: op[1], done: false };
@@ -95,8 +95,8 @@ var JsonInc = /** @class */ (function () {
     };
     JsonInc.prototype.includeStringsAsValue = function (input, baseDir) {
         return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
             var replaceOperations_1, i, replaceOperation, replace, err_1;
+            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -154,8 +154,8 @@ var JsonInc = /** @class */ (function () {
     };
     JsonInc.prototype.includeStringsAsPart = function (input, baseDir) {
         return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
             var replaceOperations_2, i, replaceOperation, replace, err_2;
+            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -215,8 +215,8 @@ var JsonInc = /** @class */ (function () {
     };
     JsonInc.prototype.includeJsonAsValue = function (input, baseDir, level) {
         return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
             var replaceOperations_3, i, replaceOperation, replace, err_3;
+            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -291,8 +291,8 @@ var JsonInc = /** @class */ (function () {
     };
     JsonInc.prototype.includeJsonAsPart = function (input, baseDir, level) {
         return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
             var replaceOperations_4, i, replaceOperation, replace, err_4;
+            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -426,6 +426,13 @@ var JsonInc = /** @class */ (function () {
             var pathParts = toInclude.substr(1).split('/').join(options.pathDelimiter);
             key = pathParts + options.pathDelimiter + key;
         }
+        if (key[0] === options.pathDelimiter) {
+            key = key.substr(1);
+        }
+        if (options.regexExpression && options.regexOptions && options.regexReplace) {
+            var regex = new RegExp(options.regexExpression, options.regexOptions);
+            key = key.replace(regex, options.regexReplace);
+        }
         return key;
     };
     JsonInc.prototype.getPartIncludeOptions = function (argsString) {
@@ -433,7 +440,10 @@ var JsonInc = /** @class */ (function () {
         var options = {
             includeRelativePath: true,
             pathDelimiter: '_',
-            stripExtension: true
+            stripExtension: true,
+            regexExpression: Array.isArray(args.regexExpression) ? args.regexExpression[0] : args.regexExpression || undefined,
+            regexOptions: Array.isArray(args.regexOptions) ? args.regexOptions[0] : args.regexOptions || undefined,
+            regexReplace: Array.isArray(args.regexReplace) ? args.regexReplace[0] : args.regexReplace || undefined
         };
         if (Object.prototype.hasOwnProperty.call(args, 'includeRelativePath')) {
             if (Array.isArray(args.includeRelativePath)) {

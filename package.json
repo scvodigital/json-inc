@@ -1,6 +1,6 @@
 {
   "name": "@scvo/json-inc",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "A rudimentary JSON transpiler that allows JSON files to be split up into separate files",
   "main": "index.js",
   "bin": {
@@ -35,9 +35,9 @@
   },
   "homepage": "https://github.com/scvodigital/json-inc#readme",
   "dependencies": {
-    "chalk": "^2.4.1",
     "coa": "^2.0.1",
     "dot-object": "^1.7.0",
+    "glob": "^7.1.2",
     "glob-promise": "^3.4.0"
   },
   "devDependencies": {
