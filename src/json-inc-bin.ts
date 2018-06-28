@@ -4,7 +4,6 @@
 const fs = require('fs');
 const pa = require('path');
 
-const chalk = require('chalk');
 const CliEntry = require('../dist/cli-entry').CliEntry;
 
 var args = require('coa').Cmd()

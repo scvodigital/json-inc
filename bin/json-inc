@@ -2,7 +2,6 @@
 'use strict';
 var fs = require('fs');
 var pa = require('path');
-var chalk = require('chalk');
 var CliEntry = require('../dist/cli-entry').CliEntry;
 var args = require('coa').Cmd()
     .name(process.argv[1])
