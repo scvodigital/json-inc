@@ -1,8 +1,8 @@
 {
   "name": "@scvo/json-inc",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "A rudimentary JSON transpiler that allows JSON files to be split up into separate files",
-  "main": "index.js",
+  "main": "dist/json-inc.js",
   "bin": {
     "json-inc": "./bin/json-inc"
   },
